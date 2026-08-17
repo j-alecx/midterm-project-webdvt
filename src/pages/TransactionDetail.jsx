@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useParams, useNavigate, Link} from 'react-router-dom';
-import { useTransactionsContext} from '../context/TransactionsContext';
+import {useTransactionsContext} from '../context/TransactionsContext';
 import {CATEGORIES} from '../constants';
 
 export default function TransactionDetail() {
@@ -25,6 +25,10 @@ export default function TransactionDetail() {
     function handleChange(e) {
         const {name, value} = e.traget;
         setForm((f) => ({...f, [name]: value}));
+    }
+
+    function handleCategorySelect(category) {
+        setForm((f) => ({...f, category}));
     }
 
     function validate() {
@@ -59,10 +63,10 @@ export default function TransactionDetail() {
 
             {!editing ? (
                 <div className="detail-card">
+                    <p><strong>Category:</strong> {trans.category} </p>
                     <p><strong>Description:</strong> {trans.description} </p>
                     <p><strong>Amount:</strong> <span className={trans.type}>{trans.type === 'income' ? '+' : '-'}${Number(trans.amount).toFixed(2)} </span></p>
                     <p><strong>Type:</strong> {trans.type} </p>
-                    <p><strong>Category:</strong> {trans.category} </p>
                     <p><strong>Date:</strong> {trans.date} </p>
                     {trans.notes && <p><strong>Notes:</strong> {trans.notes} </p>}
 
@@ -73,26 +77,36 @@ export default function TransactionDetail() {
                 </div>
             ) : (
                 <form className="trans-form" onSubmit={handleSave} noValidate>
-                    <label>Description
+                    <div className="form-group">
+                        <span className="form-label">Category</span>
+                        <div className="category-picker">
+                            {CATEGORIES.map((c) => (
+                                <button key={c} type="button" className={`category-chip${form.category === c ? ' category-chip-selected' : ''}`}
+                                    onClick={() => handleCategorySelect(c)}>
+                                    {c}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <label>
+                        <span className="label-text">Description <span className="required-asterisk">*</span></span>
                         <input name="description" value={form.description} onChange={handleChange}/>
                         {errors.description && <span className="error">{errors.description}</span>}
                     </label>
-                    <label>Amount
+                    <label>
+                        <span className="label-text">Amount <span className="required-asterisk">*</span></span>
                         <input name="amount" type="number" step="0.01" min="0" value={form.amount} onChange={handleChange}/>
                         {errors.amount && <span className="error">{errors.amount}</span>}
                     </label>
-                    <label>Type
+                    <label>
+                        <span className="label-text">Type <span className="required-asterisk">*</span></span>
                         <select name="type" value={form.type} onChange={handleChange}>
                             <option value="expense">Expense</option>
                             <option value="income">Income</option>
                         </select>
                     </label>
-                    <label>Category
-                        <select name="category" value={form.category} onChange={handleChange}>
-                            {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
-                        </select>
-                    </label>
-                    <label>Date
+                    <label><span className="label-text">Date <span className="required-asterisk">*</span></span>
                         <input name="date" type="date" value={form.date} onChange={handleChange}/>
                         {errors.date && <span className="error">{errors.date}</span>}
                     </label>
