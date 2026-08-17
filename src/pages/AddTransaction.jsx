@@ -47,26 +47,26 @@ export default function AddTransaction() {
         <div className="page">
             <h1>Add Transaction</h1>
             <form className="trans-form" onSubmit={handleSubmit} noValidate>
-                <label>Description
+                <label>Description *
                     <input name="description" value={form.description} onChange={handleChange}/>
                     {errors.description && <span className="error">{errors.description}</span>}
                 </label>
-                <label>Amount
+                <label>Amount *
                     <input name="amount" type="number" step="0.01" min="0" value={form.amount} onChange={handleChange}/>
                     {errors.amount && <span className="error">{errors.amount}</span>}
                 </label>
-                <label>Type
+                <label>Type *
                     <select name="type" value={form.type} onChange={handleChange}>
                         <option value="expense">Expense</option>
                         <option value="income">Income</option>
                     </select>
                 </label>
-                <label>Category
+                <label>Category *
                     <select name="category" value={form.category} onChange={handleChange}>
                         {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                     </select>
                 </label>
-                <label>Date
+                <label>Date *
                     <input name="date" type="date" value={form.date} onChange={handleChange}/>
                     {errors.date && <span className="error">{errors.date}</span>}
                 </label>
