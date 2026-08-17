@@ -1,5 +1,341 @@
+:root[data-theme='light'] {
+    --bg: rgb(235, 235, 237);
+    --surface: white;
+    --text: rgb(31, 33, 43);
+    --text-muted: rgb(84, 90, 104);
+    --border: rgb(210, 218, 224);
+    --primary: rgb(252, 130, 173);
+    --primary-hover: rgb(249, 173, 200);
+    --danger: rgb(223, 59, 84);
+    --danger-hover: rgb(247, 116, 136);
+    --income: rgb(100, 147, 59);
+    --expense: rgb(186, 59, 59);
+}
+
+:root[data-theme='dark'] {
+    --bg: rgb(46, 46, 46);
+    --surface: black;
+    --text: rgb(226, 228, 241);
+    --text-muted: rgb(197, 203, 218);
+    --border: rgb(110, 114, 117);
+    --primary: rgb(186, 65, 107);
+    --primary-hover: rgb(227, 74, 127);
+    --danger: rgb(143, 37, 52);
+    --danger-hover: rgb(165, 65, 80);
+    --income: rgb(184, 239, 136);
+    --expense: rgb(255, 103, 103);
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: rgb(33, 33, 33);
+    margin: 0;
     font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.page h1 {
+    margin-top: 0;
+}
+
+.balance-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.balance-card span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.balance-card strong {
+    font-size: 2rem;
+}
+
+.positive {
+    color: var(--income);
+}
+
+.negative {
+    color: var(--expense);
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+select, input, textarea {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+}
+
+select {
+    cursor: pointer;
+}
+
+.btn-primary, .btn-secondary, .btn-danger {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background: var(--primary);
     color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-secondary {
+    background: var(--border);
+    color: var(--text);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: var(--danger-hover);
+}
+
+.trans-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.trans-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    border-left: 5px solid var(--border);
+}
+
+.trans-item.income {
+    border-left-color: var(--income);
+}
+
+.trans-item.expense {
+    border-left-color: var(--expense);
+}
+
+.trans-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: var(--text);
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.trans-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.trans-desc {
+    font-weight: 600;
+}
+
+.trans-category {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.trans-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.trans-amount.income {
+    color: var(--income);
+    font-weight: 700;
+}
+
+.empty {
+    color: var(--text-muted);
+    text-align: center;
+    padding: 30px 0;
+}
+
+.trans-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.trans-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.error {
+    color: var(--danger);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.form-actions, .detail-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.detail-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-card .income {
+    color: var(--income);
+    font-weight: 700;
+}
+
+.detail-card .expense {
+    color: var(--expense);
+    font-weight: 700;
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.theme-toggle {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    background: var(--border);
+}
+
+.summary-cards {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.summary-card {
+    flex: 1;
+    min-width: 160px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.summary-card span {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.summary-card strong {
+    font-size: 1.4rem;
+}
+
+.breakdown-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.breakdown-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 15px;
+}
+
+.breakdown-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.breakdown-bar-bg {
+    background: var(--border);
+    border-radius: 5px;
+    height: 8px;
+    overflow: hidden;
+}
+
+.breakdown-bar-fill {
+    background: var(--primary);
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.5s ease;
 }
