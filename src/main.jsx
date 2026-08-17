@@ -3,9 +3,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-function App() {
+function navigationBar() {
     return (
-        <Navbar expand="lg" className="bg-body">
+        <Navbar expand="lg" bg="dark" data-bs-theme="dark">
             <Container>
                 <img class="bi bi-cash-stack" width="30px" height="30px"></img>
                 <Navbar.Brand href="#home">Personal Budget Tracker</Navbar.Brand>
@@ -21,3 +21,11 @@ function App() {
         </Navbar>
     );
 }
+
+const Home = () => {
+    return (
+        <h1>Dashboard</h1>
+    );
+};
+
+export default navigationBar;
