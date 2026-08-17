@@ -10,7 +10,7 @@ export default function AppNavbar() {
     const {theme, toggleTheme} = useTheme();
 
     return (
-        <Navbar expand="lg" data-bs-theme="dark" className="shadow-sm py-3 navbar-pink" sticky="top">
+        <Navbar expand="lg" data-bs-theme="dark" className="shadow-sm navbar-pink" sticky="top">
             <Container>
                 <Navbar.Brand as={NavLink} to="/" className="d-flex align-items-center gap-2">
                     <i class="bi bi-currency-exchange"></i>
