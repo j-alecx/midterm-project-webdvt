@@ -4,7 +4,7 @@
     --text: rgb(31, 33, 43);
     --text-muted: rgb(84, 90, 104);
     --border: rgb(210, 218, 224);
-    --primary: rgb(252, 130, 173);
+    --primary: rgb(226, 102, 146);
     --primary-hover: rgb(249, 173, 200);
     --danger: rgb(223, 59, 84);
     --danger-hover: rgb(247, 116, 136);
@@ -14,12 +14,13 @@
 
 :root[data-theme='dark'] {
     --bg: rgb(46, 46, 46);
-    --surface: black;
+    --surface: rgb(40, 40, 40);
     --text: rgb(226, 228, 241);
     --text-muted: rgb(197, 203, 218);
     --border: rgb(110, 114, 117);
     --primary: rgb(186, 65, 107);
     --primary-hover: rgb(227, 74, 127);
+    --secondary: rgb(149, 29, 59);
     --danger: rgb(143, 37, 52);
     --danger-hover: rgb(165, 65, 80);
     --income: rgb(184, 239, 136);
@@ -30,12 +31,36 @@
     box-sizing: border-box;
 }
 
-body {
+html {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--bg);
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+html body {
     margin: 0;
-    font-family: 'Outfit', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    transition: background 0.5s ease, color 0.5s ease;
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    transition: background 0.25s ease, color 0.25s ease;
 }
 
 .container {
@@ -263,13 +288,13 @@ select {
 }
 
 .theme-toggle {
-    border: 1px solid var(--border);
+    border: none;
     background: var(--surface);
     color: var(--text);
-    border-radius: 8px;
+    border-radius: 50px;
     padding: 10px 15px;
-    font-weight: 600;
     cursor: pointer;
+    margin-left: 12px;
 }
 
 .theme-toggle:hover {
@@ -338,4 +363,21 @@ select {
     height: 100%;
     border-radius: 5px;
     transition: width 0.5s ease;
+}
+
+.navbar .nav-link {
+  font-weight: 700;
+}
+
+.navbar-pink {
+    background-color: var(--primary); 
+}
+
+.navbar .nav-link-current {
+  color: white !important;
+  box-shadow: inset 0 -2px 0 0 var(--primary);
+}
+
+.navbar .nav-link:not(.nav-link-current) {
+  color: rgba(255, 255, 255, 0.75);
 }

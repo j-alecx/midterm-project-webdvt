@@ -4,7 +4,6 @@ import {useTheme} from '../context/ThemeContext';
 
 export default function Summary() {
     const {transactions} = useTransactionsContext();
-    const {theme, toggleTheme} = useTheme();
 
     const breakdown = useMemo(() => {
         const totals = {};
@@ -22,9 +21,6 @@ export default function Summary() {
         <div className="page">
             <div className="summary-header">
                 <h1>Summary</h1>
-                <button onClick={toggleTheme} className="theme-toggle">
-                    Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
-                </button>
             </div>
 
             <div className="summary-cards">
