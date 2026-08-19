@@ -727,3 +727,14 @@ select:focus, input:focus, textarea:focus {
 .required-asterisk {
     color: var(--danger-hover);
 }
+
+.gradient-waves-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
