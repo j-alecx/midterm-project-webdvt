@@ -28,7 +28,9 @@ export default function Dashboard() {
             <div className="balance-card">
                 <div className="balance-info">
                     <span>Current Balance</span>
-                    <strong className={balance >= 0 ? 'positive' : 'negative'}>₱{balance.toFixed(2)}</strong>
+                    <strong className={balance >= 0 ? 'positive' : 'negative'}>
+                        ₱{balance.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}
+                    </strong>
                 </div>
                 <Link to="/add" className="btn-primary btn-expand">
                     <i className="bi bi-plus-lg"></i>

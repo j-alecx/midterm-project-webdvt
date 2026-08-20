@@ -4,9 +4,9 @@ import {useTransactionsContext} from '../context/TransactionsContext';
 import {CATEGORIES} from '../constants';
 
 const emptyForm = {
-    description: '',
+    name: '',
     amount: '',
-    type: 'expense',
+    type: '',
     category: CATEGORIES[0],
     date: new Date().toISOString().slice(0, 10),
     notes: '',
@@ -31,7 +31,7 @@ export default function AddTransaction() {
         const errs = {};
         
         if (!form.category) errs.category = 'Category is required.';
-        if (!form.description.trim()) errs.description = 'Description is required.';
+        if (!form.name.trim()) errs.name = 'Name is required.';
         if (form.amount === '' || Number(form.amount) <= 0) errs.amount = 'Amount is required.';
         if (!form.date) errs.date = 'Date is required.';
         return errs;
@@ -57,7 +57,7 @@ export default function AddTransaction() {
         <div className="page">
             <h1>Add Transaction</h1>
             <form className="trans-form" onSubmit={handleSubmit} noValidate>
-                <div className="form-group">
+                <div className="category-row">
                     <span className="form-label">Category <span className="required-asterisk">*</span></span>
                     <div className="category-picker">
                         {CATEGORIES.map((c) => (
@@ -71,12 +71,12 @@ export default function AddTransaction() {
                 </div>
                 
                 <div className="floating-field">
-                    <input id="description" name="description" value={form.description}
+                    <input id="name" name="name" value={form.name}
                         onChange={handleChange} placeholder=" "/>
-                    <label htmlFor="description">
-                        <span className="label-text">Description <span className="required-asterisk">*</span></span>
+                    <label htmlFor="name">
+                        <span className="label-text">Name <span className="required-asterisk">*</span></span>
                     </label>
-                    {errors.description && <span className="error">{errors.description}</span>}
+                    {errors.name && <span className="error">{errors.name}</span>}
                 </div>
 
                 <div className="floating-field amount-field">

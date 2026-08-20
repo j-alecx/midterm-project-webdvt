@@ -24,8 +24,8 @@ export default function Summary() {
             </div>
 
             <div className="summary-cards">
-                <div className="summary-card"><span>Total Income</span><strong className="positive">₱{totalIncome.toFixed(2)}</strong></div>
-                <div className="summary-card"><span>Total Expenses</span><strong className="negative">₱{totalExpense.toFixed(2)}</strong></div>
+                <div className="summary-card"><span>Total Income</span><strong className="positive">₱{totalIncome.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</strong></div>
+                <div className="summary-card"><span>Total Expenses</span><strong className="negative">₱{totalExpense.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</strong></div>
             </div>
 
             <h2>Spending by Category</h2>
@@ -39,7 +39,7 @@ export default function Summary() {
                             <li key={category} className="breakdown-item">
                                 <div className="breakdown-label">
                                     <span>{category}</span>
-                                    <span>₱{amount.toFixed(2)} ({pct.toFixed(1)}%)</span>
+                                    <span>₱{amount.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} ({pct.toFixed(1)}%)</span>
                                 </div>
                                 <div className="breakdown-bar-bg">
                                     <div className="breakdown-bar-fill" style={{width: `${pct}%`}}/>

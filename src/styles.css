@@ -397,7 +397,7 @@ html body {
     gap: 2px;
 }
 
-.trans-desc {
+.trans-name {
     font-weight: 600;
 }
 
@@ -496,7 +496,7 @@ html body {
 .summary-cards {
     display: flex;
     gap: 12px;
-    margin: 20px 0;
+    margin: 8px 0;
     flex-wrap: wrap;
 }
 
@@ -682,7 +682,6 @@ html body {
 .balance-card strong {
     font-size: 2.4rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
     animation: countIn 0.4s ease-out;
 }
 
@@ -780,12 +779,6 @@ select:focus, input:focus, textarea:focus {
     box-shadow: 0 0 0 3px rgba(226, 102, 146, 0.25);
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
 .form-label {
     font-weight: 500;
     font-size: 1rem;
@@ -830,7 +823,7 @@ select:focus, input:focus, textarea:focus {
 
 .floating-field input, .floating-field select, .floating-field textarea {
     width: 100%;
-    padding: 18px 14px 8px;
+    padding: 15px 14px 12px;
 }
 
 .floating-field label {
@@ -884,6 +877,36 @@ select:focus, input:focus, textarea:focus {
     }
 }
 
+.category-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.category-row .form-label {
+    flex-shrink: 0;
+    padding-top: 6px;
+    padding-left: 12px;
+}
+
+.category-row .category-picker {
+    flex: 1;
+    justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+    .category-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .category-row .category-picker {
+        justify-content: flex-start;
+    }
+}
+
 .type-toggle-row {
     display: flex;
     align-items: center;
@@ -898,6 +921,10 @@ select:focus, input:focus, textarea:focus {
     border-radius: 10px;
     overflow: hidden;
     flex-shrink: 0;
+}
+
+.type-toggle-row .form-label {
+    padding-left: 12px;
 }
 
 .type-option {

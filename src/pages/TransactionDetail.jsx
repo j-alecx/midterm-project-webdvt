@@ -39,7 +39,7 @@ export default function TransactionDetail() {
 
     function validate() {
         const errs = {};
-        if (!form.description.trim()) errs.description = 'Description is required.';
+        if (!form.name.trim()) errs.name = 'Name is required.';
         if (form.amount === '' || Number(form.amount) <= 0) errs.amount = 'Amount is required.';
         if (!form.date) errs.date = 'Date is required.';
         return errs;
@@ -70,8 +70,8 @@ export default function TransactionDetail() {
             {!editing ? (
                 <div className="detail-card">
                     <p><strong>Category:</strong> {trans.category} </p>
-                    <p><strong>Description:</strong> {trans.description} </p>
-                    <p><strong>Amount:</strong> <span className={trans.type}>{trans.type === 'income' ? '+' : '-'}${Number(trans.amount).toFixed(2)} </span></p>
+                    <p><strong>Name:</strong> {trans.name} </p>
+                    <p><strong>Amount:</strong> <span className={trans.type}>{trans.type === 'income' ? '+' : '-'}₱{Number(trans.amount).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} </span></p>
                     <p><strong>Type:</strong> {trans.type} </p>
                     <p><strong>Date:</strong> {trans.date} </p>
                     {trans.notes && <p><strong>Notes:</strong> {trans.notes} </p>}
@@ -83,7 +83,7 @@ export default function TransactionDetail() {
                 </div>
             ) : (
                 <form className="trans-form" onSubmit={handleSave} noValidate>
-                    <div className="form-group">
+                    <div className="category-row">
                         <span className="form-label">Category</span>
                         <div className="category-picker">
                             {CATEGORIES.map((c) => (
@@ -96,11 +96,11 @@ export default function TransactionDetail() {
                     </div>
 
                     <div className="floating-field">
-                        <input id="edit-description" name="description" value={form.description} onChange={handleChange} placeholder=" "/>
-                        <label htmlFor="edit-description">
-                            <span className="label-text">Description <span className="required-asterisk">*</span></span>
+                        <input id="edit-name" name="name" value={form.name} onChange={handleChange} placeholder=" "/>
+                        <label htmlFor="edit-name">
+                            <span className="label-text">Name <span className="required-asterisk">*</span></span>
                         </label>
-                        {errors.description && <span className="error">{errors.description}</span>}
+                        {errors.name && <span className="error">{errors.name}</span>}
                     </div>
 
                     <div className="floating-field amount-field">
