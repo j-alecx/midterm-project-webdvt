@@ -24,26 +24,40 @@ export default function Dashboard() {
     return (
         <div className="page">
             <h1>Dashboard</h1>
+
             <div className="balance-card">
-                <span>Current Balance</span>
-                <strong className={balance >= 0 ? 'positive' : 'negative'}>${balance.toFixed(2)}</strong>
+                <div className="balance-info">
+                    <span>Current Balance</span>
+                    <strong className={balance >= 0 ? 'positive' : 'negative'}>₱{balance.toFixed(2)}</strong>
+                </div>
+                <Link to="/add" className="btn-primary btn-expand">
+                    <i className="bi bi-plus-lg"></i>
+                    <span className="btn-expand-text">Add Transaction</span>
+                </Link>
             </div>
 
-            <div className="filters">
-                <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
-                    <option value="All">All</option>
-                    <option value="Income">Income</option>
-                    <option value="Expense">Expense</option>
-                </select>
-
-                <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
-                    <option value="All">All</option>
-                    {CATEGORIES.map((c) => (
-                        <option key={c} value={c}>{c}</option>
+            <div className="filter-group">
+                <span className="form-label">Type</span>
+                <div className="category-picker">
+                    {['All', 'income', 'expense'].map((t) => (
+                        <button key={t} type="button" className={`category-chip${typeFilter === t ? ' category-chip-selected' : ''}`}
+                            onClick={() => setTypeFilter(t)}>
+                            {t === 'All' ? 'All' : t === 'income' ? 'Income' : 'Expense'}
+                        </button>
                     ))}
-                </select>
+                </div>
+            </div>
 
-                <Link to="/add" className="btn-primary">+ Add Transaction</Link>
+            <div className="filter-group">
+                <span className="form-label">Category</span>
+                <div className="category-picker">
+                    <button type="button" className={`category-chip${categoryFilter === 'All' ? ' category-chip-selected' : ''}`}
+                        onClick={() => setCategoryFilter('All')}>All</button>
+                        {CATEGORIES.map((c) => (
+                            <button key={c} type="button" className={`category-chip${categoryFilter === c ? ' category-chip-selected' : ''}`}
+                                onClick={() => setCategoryFilter(c)}>{c}</button>
+                        ))}
+                </div>
             </div>
 
             {filtered.length === 0 ? (

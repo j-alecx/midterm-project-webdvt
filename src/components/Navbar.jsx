@@ -16,7 +16,14 @@ export default function AppNavbar() {
                     <i className="bi bi-currency-exchange"></i>
                     Personal Budget Tracker
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+
+                <div className="d-flex align-items-center gap-2 order-lg-2">
+                    <button onClick={toggleTheme} className="theme-toggle">
+                        <i className={`bi ${theme === 'light' ? 'bi-moon-stars-fill' : 'bi-sun-fill'}`}></i>
+                    </button>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                </div>
+
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="d-lg-none flex-column mobile-nav-links">
                         <Nav.Link as={NavLink} to="/" end className={linkClass}>
@@ -28,12 +35,6 @@ export default function AppNavbar() {
                         <Nav.Link as={NavLink} to ="/summary" className={linkClass}>
                             <i className="bi bi-pie-chart me-2"></i>Summary
                         </Nav.Link>
-                    </Nav>
-
-                    <Nav className="ms-auto gap-2 justify-content-start">
-                        <button onClick={toggleTheme} className="theme-toggle">
-                            <i className={`bi ${theme === 'light' ? 'bi-moon-stars-fill' : 'bi-sun-fill'}`}></i>
-                        </button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -5,7 +5,7 @@ import {CATEGORIES} from '../constants';
 
 export default function TransactionDetail() {
     const {id} = useParams();
-    const navigate = useeNavigate();
+    const navigate = useNavigate();
     const {getTransactionById, updateTransaction, deleteTransaction} = useTransactionsContext();
     const trans = getTransactionById(id);
     const [editing, setEditing] = useState(false);
@@ -23,12 +23,18 @@ export default function TransactionDetail() {
     }
 
     function handleChange(e) {
-        const {name, value} = e.traget;
+        const {name, value} = e.target;
         setForm((f) => ({...f, [name]: value}));
     }
 
     function handleCategorySelect(category) {
         setForm((f) => ({...f, category}));
+    }
+
+    function handleAmountKeyDown(e) {
+        if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') {
+            e.preventDefault();
+        }
     }
 
     function validate() {
@@ -89,33 +95,57 @@ export default function TransactionDetail() {
                         </div>
                     </div>
 
-                    <label>
-                        <span className="label-text">Description <span className="required-asterisk">*</span></span>
-                        <input name="description" value={form.description} onChange={handleChange}/>
+                    <div className="floating-field">
+                        <input id="edit-description" name="description" value={form.description} onChange={handleChange} placeholder=" "/>
+                        <label htmlFor="edit-description">
+                            <span className="label-text">Description <span className="required-asterisk">*</span></span>
+                        </label>
                         {errors.description && <span className="error">{errors.description}</span>}
-                    </label>
-                    <label>
-                        <span className="label-text">Amount <span className="required-asterisk">*</span></span>
-                        <input name="amount" type="number" step="0.01" min="0" value={form.amount} onChange={handleChange}/>
+                    </div>
+
+                    <div className="floating-field amount-field">
+                        <input id="edit-amount" name="amount" type="number" step="0.01" min="0" value={form.amount}
+                            onChange={handleChange} onKeyDown={handleAmountKeyDown} placeholder=" "/>
+                        <label htmlFor="edit-amount">
+                            <span className="label-text">Amount <span className="required-asterisk">*</span></span>
+                        </label>
                         {errors.amount && <span className="error">{errors.amount}</span>}
-                    </label>
-                    <label>
-                        <span className="label-text">Type <span className="required-asterisk">*</span></span>
-                        <select name="type" value={form.type} onChange={handleChange}>
-                            <option value="expense">Expense</option>
-                            <option value="income">Income</option>
-                        </select>
-                    </label>
-                    <label><span className="label-text">Date <span className="required-asterisk">*</span></span>
-                        <input name="date" type="date" value={form.date} onChange={handleChange}/>
-                        {errors.date && <span className="error">{errors.date}</span>}
-                    </label>
-                    <label>Notes
-                        <textarea name="notes" value={form.notes || ''} onChange={handleChange} rows={3}/>
-                    </label>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="type-toggle-row">
+                            <span className="form-label">Type <span className="required-asterisk">*</span></span>
+                            <div className="type-toggle">
+                                <button type="button" className={`type-option${form.type === 'expense' ? ' type-option-selected expense' : ''}`}
+                                    onClick={() => setForm((f) => ({...f, type: 'expense'}))}>
+                                    <i className="bi bi-dash-circle"></i> Expense
+                                </button>
+                                <button type="button" className={`type-option${form.type === 'income' ? ' type-option-selected income' : ''}`}>
+                                    <i className="bi bi-plus-circle"></i> Income
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="floating field">
+                            <input id="edit-date" name="date" type="date" value={form.date} onChange={handleChange} placeholder=" "/>
+                            <label htmlFor="edit-date">
+                                <span className="label-text">Date <span className="required-asterisk">*</span></span>
+                            </label>
+                            {errors.date && <span className="error">{errors.date}</span>}
+                        </div>
+                    </div>
+
+                    <div className="floating-field">
+                        <textarea id="edit-notes" name="notes" value={form.notes || ''} onChange={handleChange} rows={3} placeholder=" "/>
+                        <label htmlFor="edit-notes">Notes</label>
+                    </div>
+
                     <div className="detail-actions">
-                        <button type="submit" className="btn-primary">Save Changes</button>
-                        <button type="button" className="btn-secondary" onClick={() => {setEditing(false); setForm({...trans}); setErrors({}); }}>Cancel</button>
+                        <button type="submit" classsName="btn-primary">Save Changes</button>
+                        <button type="button" className="btn-secondary" 
+                            onClick={() => {setEditing(false); setForm({...trans}); setErrors({});}}>
+                            Cancel
+                        </button>
                     </div>
                 </form>
             )}

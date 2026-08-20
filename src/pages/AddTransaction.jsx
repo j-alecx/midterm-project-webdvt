@@ -47,6 +47,12 @@ export default function AddTransaction() {
         navigate('/');
     }
 
+    function handleAmountKeyDown(e) {
+        if (e.key === 'e' || e.key === 'E' || e.key === "+" || e.key === '-') {
+            e.preventDefault();
+        }
+    }
+
     return (
         <div className="page">
             <h1>Add Transaction</h1>
@@ -63,31 +69,55 @@ export default function AddTransaction() {
                     </div>
                     {errors.category && <span className="error">{errors.category}</span>}
                 </div>
-                <label>
-                    <span className="label-text">Description <span className="required-asterisk">*</span></span>
-                    <input name="description" value={form.description} onChange={handleChange}/>
+                
+                <div className="floating-field">
+                    <input id="description" name="description" value={form.description}
+                        onChange={handleChange} placeholder=" "/>
+                    <label htmlFor="description">
+                        <span className="label-text">Description <span className="required-asterisk">*</span></span>
+                    </label>
                     {errors.description && <span className="error">{errors.description}</span>}
-                </label>
-                <label>
-                    <span className="label-text">Amount <span className="required-asterisk">*</span></span>
-                    <input name="amount" type="number" step="0.01" min="0" value={form.amount} onChange={handleChange}/>
+                </div>
+
+                <div className="floating-field amount-field">
+                    <input id="amount" name="amount" type="number" step="0.01" min="0" value={form.amount}
+                        onChange={handleChange} onKeyDown={handleAmountKeyDown} placeholder=" "/>
+                    <label htmlFor="amount">
+                        <span className="label-text">Amount <span className="required-asterisk">*</span></span>
+                    </label>
                     {errors.amount && <span className="error">{errors.amount}</span>}
-                </label>
-                <label>
-                    <span className="label-text">Type <span className="required-asterisk">*</span></span>
-                    <select name="type" value={form.type} onChange={handleChange}>
-                        <option value="expense">Expense</option>
-                        <option value="income">Income</option>
-                    </select>
-                </label>
-                <label>
-                    <span className="label-text">Date <span className="required-asterisk">*</span></span>
-                    <input name="date" type="date" value={form.date} onChange={handleChange}/>
-                    {errors.date && <span className="error">{errors.date}</span>}
-                </label>
-                <label>Notes (optional)
-                    <textarea name="notes" value={form.notes} onChange={handleChange} rows={3}/>
-                </label>
+                </div>
+                
+                <div className="form-row">
+                    <div className="type-toggle-row">
+                        <span className="form-label">Type <span className="required-asterisk">*</span></span>
+                        <div className="type-toggle">
+                            <button type="button" className={`type-option${form.type === 'expense' ? ' type-option-selected expense' : ''}`}
+                                onClick={() => setForm((f) => ({...f, type: 'expense'}))}>
+                                <i className="bi bi-dash-circle"></i> Expense
+                            </button>
+                            <button type="button" className={`type-option${form.type === 'income' ? ' type-option-selected income' : ''}`} 
+                                onClick={() => setForm((f) => ({...f, type: 'income' }))}>
+                                <i className="bi bi-plus-circle"></i> Income
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="floating-field">
+                        <input id="date" name="date" type="date" value={form.date}
+                            onChange={handleChange} placeholder=" "/>
+                        <label htmlFor="date">
+                            <span className="label-text">Date <span className="required-asterisk">*</span></span>
+                        </label>
+                        {errors.date && <span className="error">{errors.date}</span>}
+                    </div>
+                </div>
+
+                <div className="floating-field">
+                    <textarea id="notes" name="notes" value={form.notes}
+                        onChange={handleChange} rows={3} placeholder=" "/>
+                    <label htmlFor="notes">Notes</label>
+                </div>
                 
                 <div className="form-actions">
                     <button type="submit" className="btn-primary">Save Transaction</button>
