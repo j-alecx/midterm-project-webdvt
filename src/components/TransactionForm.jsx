@@ -25,6 +25,16 @@ export default function TransactionForm({initialForm, onSubmit, onCancel, submit
         setForm((f) => ({...f, [name]: value}));
     }
 
+    function handleAmountChange(e) {
+        let value = e.target.value;
+        value = value.replace(/[^0-9.]/g, '');
+        const parts = value.split('.');
+        if (parts.length > 2) {
+            value = parts[0] + '.' + parts.slice(1).join('');
+        }
+        setForm((f) => ({...f, amount: value}));
+    }
+
     function handleCategorySelect(category) {
         setForm((f) => ({...f, category}));
     }
@@ -107,7 +117,7 @@ export default function TransactionForm({initialForm, onSubmit, onCancel, submit
             </div>
 
             <div className="floating-field amount-field">
-                <input id="amount" name="amount" type="number" step="0.01" min="0" value={form.amount} onChange={handleChange} onKeyDown={handleAmountKeyDown} placeholder=" "/>
+                <input id="amount" name="amount" type="text" inputMode="decimal" value={form.amount} onChange={handleAmountChange} onKeyDown={handleAmountKeyDown} placeholder=" "/>
                 <label htmlFor="amount">
                     <span className="label-text">Amount <span className="required-asterisk">*</span></span>
                 </label>
