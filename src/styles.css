@@ -582,10 +582,7 @@ html body {
     color: var(--danger);
     font-size: 0.8rem;
     font-weight: 400;
-}
-
-.type-error {
-    margin-top: -10px;
+    margin-left: 7px;
 }
 
 .form-actions, .detail-actions {
@@ -1081,10 +1078,20 @@ select:focus, input:focus, textarea:focus {
 
 .inline-field-group {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    gap: 4px;
     flex: 1;
     min-width: 220px;
+}
+
+.inline-field-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.inline-field-control .type-toggle, .inline-field-control .custom-select {
+    flex: 1;
 }
 
 .inline-field-group .form-label {
