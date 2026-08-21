@@ -40,16 +40,55 @@ export default function TransactionDetail() {
 
             {!editing ? (
                 <div className="detail-card">
-                    <p><strong>Category:</strong> {trans.category} </p>
-                    <p><strong>Name/Description:</strong> {trans.name} </p>
-                    <p><strong>Amount:</strong> <span className={trans.type}>{trans.type === 'income' ? '+' : '-'}₱{Number(trans.amount).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} </span></p>
-                    <p><strong>Type:</strong> {trans.type} </p>
-                    <p><strong>Date:</strong> {formatDate(trans.date)} </p>
-                    {trans.notes && <p><strong>Notes:</strong> {trans.notes} </p>}
+                    <div className="detail-header">
+                        <div className="detail-icon">
+                            <i className="bi bi-basket"></i>
+                        </div>
+                        <div className="detail-header-info">
+                            <div className="detail-name-row">
+                                <h2 className="detail-name">{trans.name}</h2>
+                                <div className="detail-tags">
+                                    <span className={`trans-type-tag ${trans.type}`}>{trans.type === 'income' ? 'Income' : 'Expense'}</span>
+                                    <span className="trans-category-tag">{trans.category}</span>
+                                </div>
+                                <p className={`detail-big-amount ${trans.type}`}>{trans.type === 'income' ? '+' : '-'}₱{Number(trans.amount).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="detail-section">
+                        <h3>Transaction Details</h3>
+                        <div className="detail-row">
+                            <span className="detail-row-label"><i className="bi bi-card-text"></i> Description</span>
+                            <span className="detail-row-value">{trans.name}</span>
+                        </div>
+                        <div className="detail-row">
+                            <span className="detail-row-label"><i className="bi bi-calendar-event"></i> Date</span>
+                            <span className="detail-row-value">{formatDate(trans.date)}</span>
+                        </div>
+                        <div className="detail-row">
+                            <span className="detail-row-label"><i className="bi bi-tag"></i> Category</span>
+                            <span className="detail-row-value">{trans.category}</span>
+                        </div>
+                        {trans.notes && (
+                        <div className="detail-row">
+                            <span className="detail-row-label"><i className="bi bi-journal-text"></i> Notes</span>
+                            <span className="detail-row-value">{trans.notes}</span>
+                        </div>
+                        )}
+                        <div className="detail-row">
+                            <span className="detail-row-label"><i className="bi bi-cash-stack"></i> Amount</span>
+                            <span className="detail-row-value">₱{Number(trans.amount).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</span>
+                        </div>
+                    </div>
 
                     <div className="detail-actions">
-                        <button className="btn-primary" onClick={() => setEditing(true)}>Edit</button>
-                        <button className="btn-danger" onClick={handleDelete}>Delete</button>
+                        <button className="btn-outline-primary" onClick={() => setEditing(true)}>
+                            <i className="bi bi-pencil"></i> Edit Transaction
+                        </button>
+                        <button className="btn-danger" onClick={handleDelete}>
+                            <i className="bi bi-trash"></i> Delete Transaction
+                        </button>
                     </div>
                 </div>
             ) : (
