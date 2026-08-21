@@ -29,7 +29,7 @@ export default function Dashboard() {
                 <div className="balance-info">
                     <span>Current Balance</span>
                     <strong className={balance >= 0 ? 'positive' : 'negative'}>
-                        ₱{balance.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}
+                        {balance < 0 ? '-' : ''}₱{Math.abs(balance).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}
                     </strong>
                 </div>
                 <Link to="/add" className="btn-primary btn-expand">
@@ -38,7 +38,7 @@ export default function Dashboard() {
                 </Link>
             </div>
 
-            <div className="filter-group">
+            <div className="category-row filter-row">
                 <span className="form-label">Type</span>
                 <div className="category-picker">
                     {['All', 'income', 'expense'].map((t) => (
@@ -50,7 +50,7 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <div className="filter-group">
+            <div className="category-row filter-row">
                 <span className="form-label">Category</span>
                 <div className="category-picker">
                     <button type="button" className={`category-chip${categoryFilter === 'All' ? ' category-chip-selected' : ''}`}
