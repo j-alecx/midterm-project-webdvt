@@ -22,7 +22,7 @@ export default function TransactionForm({initialForm, onSubmit, onCancel, submit
 
     function handleChange(e) {
         const {name, value} = e.target;
-        setForrm((f) => ({...f, [name]: value}));
+        setForm((f) => ({...f, [name]: value}));
     }
 
     function handleCategorySelect(category) {
@@ -60,7 +60,7 @@ export default function TransactionForm({initialForm, onSubmit, onCancel, submit
                     <div className="inline-field-control">
                         <span className="form-label">Type: <span className="required-asterisk">*</span></span>
                         <div className="type-toggle type-toggle-full">
-                            <button type="button" className={`type-option${form.type === 'expense' ? 'type-option-selected expense' : ''}`}
+                            <button type="button" className={`type-option${form.type === 'expense' ? ' type-option-selected expense' : ''}`}
                                 onClick={() => setForm((f) => ({...f, type: 'expense', category: ''}))}>
                                 <i className="bi bi-dash-circle"></i> Expense
                             </button>

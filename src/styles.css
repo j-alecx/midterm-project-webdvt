@@ -1199,10 +1199,21 @@ select:focus, input:focus, textarea:focus {
     justify-content: center;
     gap: 6px;
     white-space: nowrap;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.type-option:focus {
+    outline: none;
 }
 
 .type-option:first-child {
     border-right: 1px solid var(--border);
+}
+
+.type-toggle:has(.type-option-selected.expense) .type-option:first-child,
+.type-toggle:has(.type-option-selected.income) .type-option:first-child {
+    border-right-color: transparent;
 }
 
 .type-option-selected.expense {
