@@ -48,7 +48,7 @@ function BreakdownSection({title, breakdown, total, emptyMessage}) {
             ) : (
                 <div className="breakdown-content">
                     <DonutChart breakdown={breakdown} total={total} centerLabel={title}/>
-                    <div className="breakdown-list">
+                    <div className="breakdown-list-wrapper">
                         <StackedBar breakdown={breakdown} total={total}/>
                         <ul className="breakdown-list">
                         {breakdown.map(([category, amount], i) => {

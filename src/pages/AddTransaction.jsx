@@ -1,4 +1,4 @@
-import {useNavigate, Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {useTransactionsContext} from '../context/TransactionsContext';
 import TransactionForm from '../components/TransactionForm';
 
