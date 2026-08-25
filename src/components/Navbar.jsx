@@ -17,7 +17,7 @@ export default function AppNavbar() {
                     Personal Budget Tracker
                 </Navbar.Brand>
 
-                <div className="d-flex align-items-center gap-2 order-lg-2">
+                <div className="d-flex align-items-center gap-3 order-lg-2">
                     <button onClick={toggleTheme} className="theme-toggle">
                         <i className={`bi ${theme === 'light' ? 'bi-moon-stars-fill' : 'bi-sun-fill'}`}></i>
                     </button>

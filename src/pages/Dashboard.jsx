@@ -65,11 +65,14 @@ export default function Dashboard() {
             {filtered.length === 0 ? (
                 <p className="empty">No transactions found.</p>
             ) : (
+                <>
+                <p className="trans-list-name">Transactions List</p>
                 <ul className="trans-list">
                     {filtered.map((t) => (
                         <TransactionItem key={t.id} trans={t}/>
                     ))}
                 </ul>
+                </>
             )}
         </div>
     );

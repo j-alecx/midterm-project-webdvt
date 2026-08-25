@@ -1,5 +1,6 @@
 import {useMemo} from 'react';
 import {useTransactionsContext} from '../context/TransactionsContext';
+import {formatCurrency} from '../constants';
 
 const CHART_COLORS = ['#e2668f', '#f9adc8', '#ba415e', '#8f2557', '#c9184a', '#ff6b9d', '#d81159', '#a4193d', '#ff8fab', '#ffb3c6',];
 
@@ -32,7 +33,7 @@ function DonutChart({breakdown, total, centerLabel}) {
         <div className="donut-chart" style={{background: gradient}}>
             <div className="donut-chart-center">
                 <span>{centerLabel}</span>
-                <strong>₱{total.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</strong>
+                <strong>{formatCurrency(total)}</strong>
             </div>
         </div>
     );
@@ -52,11 +53,12 @@ function BreakdownSection({title, breakdown, total, emptyMessage}) {
                         <ul className="breakdown-list">
                         {breakdown.map(([category, amount], i) => {
                             const pct = total > 0 ? (amount / total) * 100 : 0;
+                            const pctDisplay = pct > 0 && pct < 0.1 ? '<0.1' : pct.toFixed(1);
                             return (
                                 <li key={category} className="breakdown-item">
                                     <span className="breakdown-swatch" style={{background: CHART_COLORS[i % CHART_COLORS.length]}}></span>
-                                    <span className="breakdown-item-name">{category}</span>
-                                    <span className="breakdown-item-amount">₱{amount.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} ({pct.toFixed(1)}%)</span>
+                                    <span className="breakdown-item-name">{category} - </span>
+                                    <span className="breakdown-item-amount">₱{amount.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} ({pctDisplay}%)</span>
                                 </li>
                             );
                         })}
