@@ -2,7 +2,7 @@ import {useState, useMemo} from 'react';
 import {Link} from 'react-router-dom';
 import {useTransactionsContext} from '../context/TransactionsContext';
 import TransactionItem from '../components/TransactionItem';
-import {CATEGORIES} from '../constants';
+import {EXPENSE_CATEGORIES, INCOME_CATEGORIES, CATEGORIES} from '../constants';
 
 export default function Dashboard() {
     const {transactions} = useTransactionsContext();
@@ -20,6 +20,8 @@ export default function Dashboard() {
     const balance = useMemo(() => {
         return transactions.reduce((acc, t) => (t.type === 'income' ? acc + Number(t.amount) : acc - Number(t.amount)), 0);
     }, [transactions]);
+
+    const activeCategories = typeFilter === 'income' ? INCOME_CATEGORIES : typeFilter === 'expense' ? EXPENSE_CATEGORIES : CATEGORIES;
 
     return (
         <div className="page">
@@ -43,7 +45,7 @@ export default function Dashboard() {
                 <div className="category-picker">
                     {['All', 'income', 'expense'].map((t) => (
                         <button key={t} type="button" className={`category-chip${typeFilter === t ? ' category-chip-selected' : ''}`}
-                            onClick={() => setTypeFilter(t)}>
+                            onClick={() => {setTypeFilter(t); setCategoryFilter('All');}}>
                             {t === 'All' ? 'All' : t === 'income' ? 'Income' : 'Expense'}
                         </button>
                     ))}
@@ -54,11 +56,13 @@ export default function Dashboard() {
                 <span className="form-label">Category</span>
                 <div className="category-picker">
                     <button type="button" className={`category-chip${categoryFilter === 'All' ? ' category-chip-selected' : ''}`}
-                        onClick={() => setCategoryFilter('All')}>All</button>
-                        {CATEGORIES.map((c) => (
-                            <button key={c} type="button" className={`category-chip${categoryFilter === c ? ' category-chip-selected' : ''}`}
-                                onClick={() => setCategoryFilter(c)}>{c}</button>
-                        ))}
+                        onClick={() => setCategoryFilter('All')}>All
+                    </button>
+                    {activeCategories.map((c) => (
+                        <button key={c} type="button" className={`category-chip${categoryFilter === c ? ' category-chip-selected' : ''}`}
+                            onClick={() => setCategoryFilter(c)}>{c}
+                        </button>
+                    ))}
                 </div>
             </div>
 

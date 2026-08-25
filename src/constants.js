@@ -1,6 +1,7 @@
 export const EXPENSE_CATEGORIES = ['Food', 'Transport', 'Entertainment', 'Travel', 'Bills', 'Shopping', 'Health', 'Education', 'Rent', 'Other', ];
 export const INCOME_CATEGORIES = ['Salary', 'Allowance', 'Freelance', 'Business', 'Investments', 'Gifts', 'Other', ];
-export const CATEGORIES = [...new Set([...EXPENSE_CATEGORIES, ...INCOME_CATEGORIES])];
+const rawCombined = [...new Set([...EXPENSE_CATEGORIES, ...INCOME_CATEGORIES])];
+export const CATEGORIES = [...rawCombined.filter((c) => c !== 'Other'), 'Other'];
 export const TYPES = ['income', 'expense'];
 
 export function formatDate(dateString) {
