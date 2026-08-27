@@ -352,9 +352,6 @@ html body {
     border-radius: 50% !important;
     overflow: hidden;
     white-space: nowrap;
-    transform: none !important;
-    animation: none !important;
-    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.35s ease;
 }
 
 .btn-expand i {
@@ -402,7 +399,6 @@ html body {
     display: inline-flex;
     align-items: center;
     font-size: 0.95rem;
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .btn-primary, .btn-danger {
@@ -418,16 +414,6 @@ html body {
 
 .btn-primary:active, .btn-danger:active, .theme-toggle:active {
     transform: scale(0.92);
-}
-
-.btn-primary:not(:active):hover, .btn-danger:not(:active):hover {
-    animation: btnBounce 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes btnBounce {
-    0% {transform: scale(1);}
-    50% {transform: scale(1.06);}
-    100% {transform: scale(1);}
 }
 
 /* Transactions in Dashboard */
@@ -1356,8 +1342,27 @@ select:focus, input:focus, textarea:focus {
     cursor: pointer;
 }
 
+.custom-select-trigger-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--bg);
+}
+
 .custom-select-trigger i:first-child {
     color: var(--primary);
+}
+
+.type-hint-message {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--primary);
+    margin-top: 4px;
+    animation: hintFade 0.3s ease-out;
+}
+
+@keyframes hintFade {
+    from {opacity: 0; transform: translateY(-4px);}
+    to {opacity: 1; transform: translateY(0);}
 }
 
 .custom-select-arrow {

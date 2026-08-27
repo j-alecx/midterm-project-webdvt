@@ -59,7 +59,7 @@ export default function TransactionDetail() {
                     <div className="detail-section">
                         <h3>Transaction Details</h3>
                         <div className="detail-row">
-                            <span className="detail-row-label"><i className="bi bi-card-text"></i> Description</span>
+                            <span className="detail-row-label"><i className="bi bi-card-text"></i> Name/Description</span>
                             <span className="detail-row-value">{trans.name}</span>
                         </div>
                         <div className="detail-row">

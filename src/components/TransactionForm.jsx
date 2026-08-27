@@ -6,6 +6,7 @@ export default function TransactionForm({initialForm, onSubmit, onCancel, submit
     const [errors, setErrors] = useState({});
     const [categoryOpen, setCategoryOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const [showTypeHint, setShowTypeHint] = useState(false);
 
     useEffect(() => {
         function handleClickOutside(e) {
@@ -87,11 +88,20 @@ export default function TransactionForm({initialForm, onSubmit, onCancel, submit
                     <div className="inline-field-control">
                         <span className="form-label">Category: <span className="required-asterisk">*</span></span>
                         <div className="custom-select" ref={dropdownRef}>
-                            <button type="button" className="custom-select-trigger" onClick={() => form.type && setCategoryOpen((o) => !o)} disabled={!form.type}>
+                            <button type="button" className={`custom-select-trigger${!form.type ? ' custom-select-trigger-disabled' : ''}`}
+                                onClick={() => {if (!form.type) {
+                                    setShowTypeHint(true);
+                                    setTimeout(() => setShowTypeHint(false), 2000);
+                                    return;
+                                }
+                                setCategoryOpen((o) => !o);
+                                }}>
                                 <span>{form.category || 'Select Category'}</span>
                                 <i className={`bi bi-chevron-down custom-select-arrow${categoryOpen ? ' open' : ''}`}></i>
                             </button>
-
+                            {showTypeHint && (
+                                <span className="type-hint-message">Select Type First.</span>
+                            )}
                             {categoryOpen && (
                                 <ul className="custom-select-list">
                                     {activeCategories.map((c) => (
