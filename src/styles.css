@@ -23,7 +23,7 @@
     --primary-hover: rgb(227, 74, 127);
     --secondary: rgb(149, 29, 59);
     --danger: rgb(195, 44, 64);
-    --danger-hover: rgb(165, 65, 80);
+    --danger-hover: rgb(222, 30, 59);
     --income: rgb(184, 239, 136);
     --expense: rgb(255, 103, 103);
 }
@@ -204,6 +204,16 @@ html body {
         flex-direction: column;
         gap: 16px;
     }
+
+    .detail-name-row {
+        flex-wrap: wrap;
+    }
+
+    .detail-big-amount {
+        margin-left: 0;
+        width: 100%;
+        order: 3;
+    }
 }
 
 .mobile-nav-links {
@@ -315,6 +325,10 @@ html body {
 .btn-danger {
     background: var(--danger);
     color: white;
+}
+
+.btn-danger i {
+    margin-right: 5px;
 }
 
 .btn-danger:hover {
@@ -640,6 +654,8 @@ html body {
     padding-bottom: 20px;
     border-bottom: 1px solid var(--border);
     margin-bottom: 20px;
+    min-width: 0;
+    width: 100%;
 }
 
 .detail-icon {
@@ -672,7 +688,11 @@ html body {
     font-size: 1.2rem;
     font-weight: 700;
     line-height: 1;
-    flex-shrink: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    flex: 1 1 150px;
+    min-width: 150px;
 }
 
 .detail-big-amount {
@@ -680,6 +700,7 @@ html body {
     font-size: 1.4rem;
     font-weight: 700;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .detail-big-amount.income {
@@ -694,6 +715,7 @@ html body {
     display: flex;
     gap: 8px;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .detail-section {
@@ -711,7 +733,8 @@ html body {
 .detail-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: 12px;
     padding: 10px 0;
     border-bottom: 1px solid var(--border);
 }
@@ -726,11 +749,15 @@ html body {
     gap: 8px;
     color: var(--text-muted);
     font-size: 0.9rem;
+    flex-shrink: 0;
 }
 
 .detail-row-value {
     font-weight: 600;
     text-align: right;
+    word-break: normal;
+    overflow-wrap: anywhere;
+    min-width: 0;
 }
 
 .detail-total-row {
